@@ -5,7 +5,9 @@
 #include "HexBoard.h"
 #include <QList>
 #include <QMouseEvent>
-//目前有一個bug:如果直接點擊灰色hex，會讓程式當掉(待解決)
+/*1.修正了點擊灰格導致程式終止
+ *2.修正有時出現無法捕獲鄰居的情況
+*/
 class Game:public QGraphicsView
 {
     Q_OBJECT

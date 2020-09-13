@@ -3,6 +3,7 @@
 #include <QPointF>
 #include <QBrush>
 #include "Game.h"
+#include <QDebug>
 extern Game *game;
 
 Hex::Hex(QGraphicsItem *parent)
@@ -134,6 +135,7 @@ void Hex::captureNeighbors()
     //走訪所有鄰居，捕獲比自己還弱的鄰居
     for(int n=0;n<neighbors.size();n++)
     {
+        qDebug()<<n;
         bool isEnemy=false;//是否為敵人
         bool isNotNeutral=false;//是否沒有持有者
 
@@ -154,27 +156,27 @@ void Hex::captureNeighbors()
 
             if (n==0){
                 thisAttack=getAttackOf(0);
-                neighborsAttack = neighbors[0]->getAttackOf(3);
+                neighborsAttack = neighbors[n]->getAttackOf(3);
             }
             else if (n==1){
                 thisAttack=getAttackOf(1);
-                neighborsAttack=neighbors[1]->getAttackOf(4);
+                neighborsAttack=neighbors[n]->getAttackOf(4);
             }
             else if (n==2){
                 thisAttack=getAttackOf(2);
-                neighborsAttack=neighbors[2]->getAttackOf(5);
+                neighborsAttack=neighbors[n]->getAttackOf(5);
             }
             else if (n==3){
                 thisAttack=getAttackOf(3);
-                neighborsAttack=neighbors[3]->getAttackOf(0);
+                neighborsAttack=neighbors[n]->getAttackOf(0);
             }
             else if (n==4){
                 thisAttack=getAttackOf(4);
-                neighborsAttack=neighbors[4]->getAttackOf(1);
+                neighborsAttack=neighbors[n]->getAttackOf(1);
             }
             else if (n == 5){
                 thisAttack=getAttackOf(5);
-                neighborsAttack=neighbors[5]->getAttackOf(2);
+                neighborsAttack=neighbors[n]->getAttackOf(2);
             }
 
             //如果攻擊力比鄰居大，則捕獲(將他的持有者變成自己)
