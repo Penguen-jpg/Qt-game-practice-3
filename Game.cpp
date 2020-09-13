@@ -34,7 +34,7 @@ void Game::start()
     scene->clear();//清畫面
 
     hexBoard=new HexBoard();
-    hexBoard->placeHexes(200,30,3,3);
+    hexBoard->placeHexes(200,30,7,7);
 
     drawGUI();//畫出介面
     createInitialCards();//初始化玩家牌組
@@ -146,6 +146,25 @@ void Game::pickUpCard(Hex *card)
 
 void Game::placeCard(Hex *hexToReplace)
 {
+    //如果cardToPlace目前沒有指向任何牌，則中斷
+    if(cardToPlace==NULL)
+    {
+        return;
+    }
+
+    //檢查是否會讓卡牌重疊
+    if(hexToReplace->getOwner()!="NONE")
+    {
+        QList<QGraphicsItem*> colliding_items=cardToPlace->collidingItems();
+        for(int n=0;n<colliding_items.size();n++)
+        {
+            if(dynamic_cast<Hex*>(colliding_items[n]))
+            {
+                return;
+            }
+        }
+    }
+
     //將cardToPlace替換到這個hex
     cardToPlace->setPos(hexToReplace->pos());
     hexBoard->getHexes().removeAll(hexToReplace);//將hexToReplace從QList中移除
