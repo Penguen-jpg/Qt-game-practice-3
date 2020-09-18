@@ -5,8 +5,8 @@
 #include "HexBoard.h"
 #include <QList>
 #include <QMouseEvent>
-/*1.修正了點擊灰格導致程式終止
- *2.修正有時出現無法捕獲鄰居的情況
+/*
+ * 1.修正了點擊灰格導致程式終止
 */
 class Game:public QGraphicsView
 {
